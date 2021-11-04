@@ -163,9 +163,9 @@ discordClient.on('ready', () => {
 discordClient.login(DISCORD_TOK)
 
 const PREFIX = '|';
-const _CMD_HELP        = PREFIX + 'help';
-const _CMD_JOIN        = PREFIX + 'esuchar';
-const _CMD_LEAVE       = PREFIX + 'salir';
+const _CMD_HELP        = PREFIX + 'auida';
+const _CMD_JOIN        = PREFIX + 'entrar';
+const _CMD_LEAVE       = PREFIX + 'adios';
 const _CMD_DEBUG       = PREFIX + 'debug';
 const _CMD_TEST        = PREFIX + 'hola';
 const _CMD_LANG        = PREFIX + 'lang';
@@ -179,12 +179,12 @@ discordClient.on('message', async (msg) => {
         const mapKey = msg.guild.id;
         if (msg.content.trim().toLowerCase() == _CMD_JOIN) {
             if (!msg.member.voice.channelID) {
-                msg.reply('Error: please join a voice channel first.')
+                msg.reply('Error: Primero conectate a algun canal animal.')
             } else {
                 if (!guildMap.has(mapKey))
                     await connect(msg, mapKey)
                 else
-                    msg.reply('Already connected')
+                    msg.reply('Ya llegue prros')
             }
         } else if (msg.content.trim().toLowerCase() == _CMD_LEAVE) {
             if (guildMap.has(mapKey)) {
@@ -192,9 +192,9 @@ discordClient.on('message', async (msg) => {
                 if (val.voice_Channel) val.voice_Channel.leave()
                 if (val.voice_Connection) val.voice_Connection.disconnect()
                 guildMap.delete(mapKey)
-                msg.reply("Disconnected.")
+                msg.reply("Ya me voy alv.")
             } else {
-                msg.reply("Cannot leave because not connected.")
+                msg.reply("No mames, ni conectado estoy.")
             }
         } else if (msg.content.trim().toLowerCase() == _CMD_HELP) {
             msg.reply(getHelpString());
@@ -208,7 +208,7 @@ discordClient.on('message', async (msg) => {
                 val.debug = true;
         }
         else if (msg.content.trim().toLowerCase() == _CMD_TEST) {
-            msg.reply('hello back =)')
+            msg.reply('Saca las cawas prro!')
         }
         else if (msg.content.split('\n')[0].split(' ')[0].trim().toLowerCase() == _CMD_LANG) {
             if (SPEECH_METHOD === 'witai') {
@@ -230,22 +230,22 @@ discordClient.on('message', async (msg) => {
               const lang = msg.content.replace(_CMD_LANG, '').trim().toLowerCase()
               val.selected_lang = lang;
             } else {
-              msg.reply('Error: this feature is only for Google')
+              msg.reply('Error: Esta caracteristica es solo para los fresas de google')
             }
         }
     } catch (e) {
-        console.log('discordClient message: ' + e)
-        msg.reply('Error#180: Something went wrong, try again or contact the developers if this keeps happening.');
+        console.log('Mensaje de discordCliente: ' + e)
+        msg.reply('Error#180: Algo esta pasanda !, intento de new o de plano mandale correo al que hizo esta madre.');
     }
 })
 
 function getHelpString() {
-    let out = '**COMMANDS:**\n'
-        out += '```'
-        out += PREFIX + 'join\n';
-        out += PREFIX + 'leave\n';
-        out += PREFIX + 'lang <code>\n';
-        out += '```'
+    let out = 'Comandos para la raza pacheca:\n'
+        out += '\n'
+        out += PREFIX + 'entrar\n';
+        out += PREFIX + 'salir\n';
+        out += PREFIX + 'hola\n';
+        out += '\n'
     return out;
 }
 
@@ -261,9 +261,9 @@ class Silence extends Readable {
 async function connect(msg, mapKey) {
     try {
         let voice_Channel = await discordClient.channels.fetch(msg.member.voice.channelID);
-        if (!voice_Channel) return msg.reply("Error: The voice channel does not exist!");
+        if (!voice_Channel) return msg.reply("Error: Ora prro ese canal de voz no existe!");
         let text_Channel = await discordClient.channels.fetch(msg.channel.id);
-        if (!text_Channel) return msg.reply("Error: The text channel does not exist!");
+        if (!text_Channel) return msg.reply("Error: Ora prro ese canal de texto no existe!");
         let voice_Connection = await voice_Channel.join();
         voice_Connection.play(new Silence(), { type: 'opus' });
         guildMap.set(mapKey, {
@@ -274,14 +274,14 @@ async function connect(msg, mapKey) {
             'debug': false,
         });
         speak_impl(voice_Connection, mapKey)
-        voice_Connection.on('disconnect', async(e) => {
+        voice_Connection.on('Me largo!', async(e) => {
             if (e) console.log(e);
             guildMap.delete(mapKey);
         })
-        msg.reply('connected!')
+        msg.reply('Ya llegue prros!')
     } catch (e) {
-        console.log('connect: ' + e)
-        msg.reply('Error: unable to join your voice channel.');
+        console.log('Conexion: ' + e)
+        msg.reply('Error: No pude conectarme, toy chiquito.');
         throw e;
     }
 }
@@ -302,11 +302,11 @@ if (SPEECH_METHOD === 'vosk') {
 
 
 function speak_impl(voice_Connection, mapKey) {
-    voice_Connection.on('speaking', async (user, speaking) => {
+    voice_Connection.on('Hablando', async (user, speaking) => {
         if (speaking.bitfield == 0 || user.bot) {
             return
         }
-        console.log(`I'm listening to ${user.username}`)
+        console.log(`Este prro esta hablando ${user.username}`)
         // this creates a 16-bit signed PCM, stereo 48KHz stream
         const audioStream = voice_Connection.receiver.createStream(user, { mode: 'pcm' })
         audioStream.on('error',  (e) => { 
@@ -316,10 +316,10 @@ function speak_impl(voice_Connection, mapKey) {
         audioStream.on('data', (data) => {
             buffer.push(data)
         })
-        audioStream.on('end', async () => {
+        audioStream.on('final', async () => {
             buffer = Buffer.concat(buffer)
             const duration = buffer.length / 48000 / 4;
-            console.log("duration: " + duration)
+            console.log("Duracion: " + duration)
 
             if (SPEECH_METHOD === 'witai' || SPEECH_METHOD === 'google') {
             if (duration < 1.0 || duration > 19) { // 20 seconds max dur
