@@ -164,10 +164,10 @@ discordClient.login(DISCORD_TOK)
 
 const PREFIX = '|';
 const _CMD_HELP        = PREFIX + 'help';
-const _CMD_JOIN        = PREFIX + 'join';
-const _CMD_LEAVE       = PREFIX + 'leave';
+const _CMD_JOIN        = PREFIX + 'esuchar';
+const _CMD_LEAVE       = PREFIX + 'salir';
 const _CMD_DEBUG       = PREFIX + 'debug';
-const _CMD_TEST        = PREFIX + 'hello';
+const _CMD_TEST        = PREFIX + 'hola';
 const _CMD_LANG        = PREFIX + 'lang';
 
 const guildMap = new Map();
