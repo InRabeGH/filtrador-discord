@@ -169,7 +169,7 @@ const _CMD_LEAVE       = PREFIX + 'adios';
 const _CMD_DEBUG       = PREFIX + 'debug';
 const _CMD_TEST        = PREFIX + 'hola';
 const _CMD_LANG        = PREFIX + 'lang';
-const _CMD_MUTE        = PREFIX + 'callate';
+//const _CMD_MUTE        = PREFIX + 'callate';
 
 const guildMap = new Map();
 
