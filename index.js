@@ -212,11 +212,9 @@ discordClient.on('message', async (msg) => {
             msg.reply('Saca las cawas prro!')
         }
         else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {
-          voice_Connection.on ('Muteando', async (user) => {
-            setMute(mute, reason); {
-              return user.username ? user.username.edit({ mute }, reason) : Promise.reject(new Error('VOICE_STATE_UNCACHED_MEMBER'));
-            }
-          })
+          setMute(mute, reason); {
+            return user.username ? user.username.edit({ mute }, reason) : Promise.reject(new Error('VOICE_STATE_UNCACHED_MEMBER'));
+          }
         }
       //   voice_Connection.on('Hablando', async (user, speaking) => {
       //     if (speaking.bitfield == 0 || user.bot) {
