@@ -211,9 +211,9 @@ discordClient.on('message', async (msg) => {
         else if (msg.content.trim().toLowerCase() == _CMD_TEST) {
             msg.reply('Saca las cawas prro!')
         }
-        else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {
-          msg.reply('Esto es para mutear !')
-        }
+        // else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {
+        //   msg.reply('Esto es para mutear !')
+        // }
         else if (msg.content.split('\n')[0].split(' ')[0].trim().toLowerCase() == _CMD_LANG) {
             if (SPEECH_METHOD === 'witai') {
               const lang = msg.content.replace(_CMD_LANG, '').trim().toLowerCase()
