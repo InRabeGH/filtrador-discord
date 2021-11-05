@@ -212,40 +212,8 @@ discordClient.on('message', async (msg) => {
             msg.reply('Saca las cawas prro!')
         }
         else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {
-          setMute(mute, reason); {
-            return user.username ? user.username.edit({ mute }, reason) : Promise.reject(new Error('VOICE_STATE_UNCACHED_MEMBER'));
-          }
+          msg.reply('Esto es para mutear !')
         }
-      //   voice_Connection.on('Hablando', async (user, speaking) => {
-      //     if (speaking.bitfield == 0 || user.bot) {
-      //         return
-      //     }
-      //     console.log(`Este prro esta hablando ${user.username}`)
-      //     // this creates a 16-bit signed PCM, stereo 48KHz stream
-      //     const audioStream = voice_Connection.receiver.createStream(user, { mode: 'pcm' })
-      //     audioStream.on('error',  (e) => { 
-      //         console.log('audioStream: ' + e)
-      //     });
-      //     let buffer = [];
-      //     audioStream.on('data', (data) => {
-      //         buffer.push(data)
-      //     })
-      //     audioStream.on('final', async () => {
-      //         buffer = Buffer.concat(buffer)
-      //         const duration = buffer.length / 48000 / 4;
-      //         console.log("Duracion: " + duration)
-      //         try {
-      //             let new_buffer = await convert_audio(buffer)
-      //             let out = await transcribe(new_buffer, mapKey);
-      //             if (out != null)
-      //                 process_commands_query(out, mapKey, user);
-      //         } catch (e) {
-      //             console.log('tmpraw rename: ' + e)
-      //         }
-  
-  
-      //     })
-      // })
         else if (msg.content.split('\n')[0].split(' ')[0].trim().toLowerCase() == _CMD_LANG) {
             if (SPEECH_METHOD === 'witai') {
               const lang = msg.content.replace(_CMD_LANG, '').trim().toLowerCase()
