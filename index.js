@@ -241,13 +241,18 @@ discordClient.on('message', async (msg) => {
           }
       } else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {                 //COMANDO MUTE
         msg.reply('No')
+        console.log('Antes de user: ' + msg)
         const user = msg.mentions.users.first();
+        console.log('Despues de user: ' + user)
         // If we have a user mentioned
         if (user) {
+          console.log('antes de member: ' + user)
           // Now we get the member from the user
           const member = msg.guild.member(user);
           // If the member is in the guild
+          console.log('Despues de member: ' + member)
           if (member) {
+            console.log('En if de member: ' + member)
             /**
              * Kick the member
              * Make sure you run this on a member, not a user!
