@@ -188,13 +188,11 @@ discordClient.on('message', async (msg) => {
                   msg.reply('Ya llegue prros')
           }
       } else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {                 //COMANDO MUTE
-        msg.reply('Saca las cawas prro!');
         voice_Connection.on('Hablando', async (user, speaking) => {
           if (speaking.bitfield == 0 || user.bot) {
             return
           }
           console.log(`Estoy por mutear a este prro: ${user.username}`)
-          msg.reply('Ya llegue prros', user.username)
         });                                                                       // FIN COMANDO MUTE
       } else if (msg.content.trim().toLowerCase() == _CMD_LEAVE) {
           if (guildMap.has(mapKey)) {
