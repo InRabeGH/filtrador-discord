@@ -162,57 +162,57 @@ discordClient.on('ready', () => {
 })
 discordClient.login(DISCORD_TOK)
 
-discordClient.on('Sacate', async (msg) => {
-  console.log('Entre a sacate: ' + msg)
-  try {
-    console.log('antes de guild: ' + msg.guild)
-    // Ignore messages that aren't from a guild
-    if (!msg.guild) return;
-    console.log('despues de guild: ' + msg.guild)
-    // If the msg content starts with "!kick"
-    if (msg.content.startsWith('!caile')) {
-      console.log('Entre a caile: ', msg.content)
-      // Assuming we mention someone in the msg, this will return the user
-      const user = msg.mentions.users.first();
-      // If we have a user mentioned
-      if (user) {
-        // Now we get the member from the user
-        const member = msg.guild.member(user);
-        // If the member is in the guild
-        if (member) {
-          /**
-           * Kick the member
-           * Make sure you run this on a member, not a user!
-           * There are big differences between a user and a member
-           */
-          member
-            .kick('Hora a chingar a su madre !')
-            .then(() => {
-              // We let the msg author know we were able to kick the person
-              msg.reply(`${user.tag}, Lo sacamos alv`);
-            })
-            .catch(err => {
-              // An error happened
-              // This is generally due to the bot not being able to kick the member,
-              // either due to missing permissions or role hierarchy
-              msg.reply('Es vergas no lo pude sacar');
-              // Log the error
-              console.error(err);
-            });
-        } else {
-          // The mentioned user isn't in this guild
-          msg.reply("que pedo, que pedooo!");
-        }
-        // Otherwise, if no user was mentioned
-      } else {
-        msg.reply("Eso no hacemos aqui muchacho!");
-      }
-    }
-  } catch (e) {
-    console.log('Mensaje de discordCliente: ' + e)
-    msg.reply('Error: Algo esta pasanda !, intento de new o de plano mandale correo al que hizo esta madre.');
-  }
-});
+// discordClient.on('Sacate', async (msg) => {
+//   console.log('Entre a sacate: ' + msg)
+//   try {
+//     console.log('antes de guild: ' + msg.guild)
+//     // Ignore messages that aren't from a guild
+//     if (!msg.guild) return;
+//     console.log('despues de guild: ' + msg.guild)
+//     // If the msg content starts with "!kick"
+//     if (msg.content.startsWith('!caile')) {
+//       console.log('Entre a caile: ', msg.content)
+//       // Assuming we mention someone in the msg, this will return the user
+//       const user = msg.mentions.users.first();
+//       // If we have a user mentioned
+//       if (user) {
+//         // Now we get the member from the user
+//         const member = msg.guild.member(user);
+//         // If the member is in the guild
+//         if (member) {
+//           /**
+//            * Kick the member
+//            * Make sure you run this on a member, not a user!
+//            * There are big differences between a user and a member
+//            */
+//           member
+//             .kick('Hora a chingar a su madre !')
+//             .then(() => {
+//               // We let the msg author know we were able to kick the person
+//               msg.reply(`${user.tag}, Lo sacamos alv`);
+//             })
+//             .catch(err => {
+//               // An error happened
+//               // This is generally due to the bot not being able to kick the member,
+//               // either due to missing permissions or role hierarchy
+//               msg.reply('Es vergas no lo pude sacar');
+//               // Log the error
+//               console.error(err);
+//             });
+//         } else {
+//           // The mentioned user isn't in this guild
+//           msg.reply("que pedo, que pedooo!");
+//         }
+//         // Otherwise, if no user was mentioned
+//       } else {
+//         msg.reply("Eso no hacemos aqui muchacho!");
+//       }
+//     }
+//   } catch (e) {
+//     console.log('Mensaje de discordCliente: ' + e)
+//     msg.reply('Error: Algo esta pasanda !, intento de new o de plano mandale correo al que hizo esta madre.');
+//   }
+// });
 
 const PREFIX = '|';
 const _CMD_HELP        = PREFIX + 'aiuda';
@@ -241,7 +241,14 @@ discordClient.on('message', async (msg) => {
           }
       } else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {                 //COMANDO MUTE
         msg.reply('No')
+
+        // Fetch a single member without caching
+        guild.members.fetch({ user, cache: false })
+          .then(console.log)
+          .catch(console.error);
+
         console.log('Antes de user: ' + msg)
+        console.log('Estructura user: ' + msg.mentions.users.first())
         const user = msg.mentions.users.first();
         console.log('Despues de user: ' + user)
         // If we have a user mentioned
