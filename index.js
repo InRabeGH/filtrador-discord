@@ -251,12 +251,15 @@ discordClient.on('message', async (msg) => {
         console.log('Estructura user: ' + discordClient.user)
         //const user = msg.mentions.users.first();
         const user = discordClient.user
+        
         console.log('Despues de user: ' + user)
         // If we have a user mentioned
         if (user) {
+          const guild = discordClient.guilds.cache.get('Guild ID')
+          const member = guild.member(user).hasPermission('KICK_MEMBERS');
           console.log('antes de member: ' + user)
           // Now we get the member from the user
-          const member = msg.guild.member(user).hasPermission('KICK_MEMBERS');
+          //const member = msg.guild.member(user).hasPermission('KICK_MEMBERS');
           // If the member is in the guild
           console.log('Despues de member: ' + member)
           if (member) {
