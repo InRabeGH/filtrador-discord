@@ -266,7 +266,7 @@ discordClient.on('message', async (msg) => {
              * Make sure you run this on a member, not a user!
              * There are big differences between a user and a member
              */
-             member.setMute(true, "Alv por puto")
+             member.edit(true, "Alv por puto")
               .then(()=>
               {msg.reply(`${user.tag}, Lo sacamos alv`);})
               .catch(err => {
@@ -275,9 +275,9 @@ discordClient.on('message', async (msg) => {
                 // either due to missing permissions or role hierarchy
                 msg.reply('Es vergas no lo pude mutear');
                 console.error(err);});
-             {
-              return this.member ? this.member.edit({ mute }, reason) : Promise.reject(new Error('VOICE_STATE_UNCACHED_MEMBER'));
-            }
+
+              console.log('await: ' + member)
+              await member.setMute(true);
 
             // member
             //   .kick('Hora a chingar a su madre !')
