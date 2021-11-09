@@ -163,12 +163,15 @@ discordClient.on('ready', () => {
 discordClient.login(DISCORD_TOK)
 
 discordClient.on('Sacate', async (msg) => {
+  console.log('Entre a sacate: ' + msg)
   try {
+    console.log('antes de guild: ' + msg.guild)
     // Ignore messages that aren't from a guild
     if (!msg.guild) return;
-
+    console.log('despues de guild: ' + msg.guild)
     // If the msg content starts with "!kick"
     if (msg.content.startsWith('!caile')) {
+      console.log('Entre a caile: ', msg.content)
       // Assuming we mention someone in the msg, this will return the user
       const user = msg.mentions.users.first();
       // If we have a user mentioned
@@ -207,7 +210,7 @@ discordClient.on('Sacate', async (msg) => {
     }
   } catch (e) {
     console.log('Mensaje de discordCliente: ' + e)
-    msg.reply('Error#180: Algo esta pasanda !, intento de new o de plano mandale correo al que hizo esta madre.');
+    msg.reply('Error: Algo esta pasanda !, intento de new o de plano mandale correo al que hizo esta madre.');
   }
 });
 
