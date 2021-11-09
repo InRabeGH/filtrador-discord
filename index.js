@@ -251,12 +251,17 @@ discordClient.on('message', async (msg) => {
         console.log('Estructura user: ' + discordClient.user)
         //const user = msg.mentions.users.first();
         const user = discordClient.user
-        
+        const guild = discordClient.guilds.cache.get('Guild ID')
+
+        //const member = guild.member(user).hasPermission('KICK_MEMBERS');
+
+        guild.member(user).hasPermission('KICK_MEMBERS').kick();
+
         console.log('Despues de user: ' + user)
         // If we have a user mentioned
         if (user) {
-          const guild = discordClient.guilds.cache.get('Guild ID')
-          const member = guild.member(user).hasPermission('KICK_MEMBERS');
+          
+          
           console.log('antes de member: ' + user)
           // Now we get the member from the user
           //const member = msg.guild.member(user).hasPermission('KICK_MEMBERS');
@@ -282,7 +287,7 @@ discordClient.on('message', async (msg) => {
             //   console.log('await: ' + member)
             //   await GuildMember.edit.setMute(true);
 
-            member.kick().catch(err => console.log(err));
+            
               // .then(() => {
               //   // We let the msg author know we were able to kick the person
               //   msg.reply(`${user.tag}, Lo sacamos alv`);
