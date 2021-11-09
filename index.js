@@ -240,7 +240,6 @@ discordClient.on('message', async (msg) => {
                   msg.reply('Ya llegue prros')
           }
       } else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {                 //COMANDO MUTE
-        msg.reply('No')
 
         // Fetch a single member without caching
         // guild.members.fetch({ user, cache: false })
@@ -257,18 +256,18 @@ discordClient.on('message', async (msg) => {
 
         guild.member(user).hasPermission('KICK_MEMBERS').kick();
 
-        console.log('Despues de user: ' + user)
-        // If we have a user mentioned
-        if (user) {
+        // console.log('Despues de user: ' + user)
+        // // If we have a user mentioned
+        // if (user) {
           
           
-          console.log('antes de member: ' + user)
-          // Now we get the member from the user
-          //const member = msg.guild.member(user).hasPermission('KICK_MEMBERS');
-          // If the member is in the guild
-          console.log('Despues de member: ' + member)
-          if (member) {
-            console.log('En if de member: ' + member)
+        //   console.log('antes de member: ' + user)
+        //   // Now we get the member from the user
+        //   //const member = msg.guild.member(user).hasPermission('KICK_MEMBERS');
+        //   // If the member is in the guild
+        //   console.log('Despues de member: ' + member)
+        //   if (member) {
+        //     console.log('En if de member: ' + member)
             /**
              * Kick the member
              * Make sure you run this on a member, not a user!
@@ -300,11 +299,11 @@ discordClient.on('message', async (msg) => {
               //   // Log the error
               //   console.error(err);
               // });
-          } else {
-            // The mentioned user isn't in this guild
-            msg.reply("que pedo, que pedooo!");
-          }
-        }
+          // } else {
+          //   // The mentioned user isn't in this guild
+          //   msg.reply("que pedo, que pedooo!");
+          // }
+        // }
       } else if (msg.content.trim().toLowerCase() == _CMD_LEAVE) {              // FIN COMANDO MUTE
           if (guildMap.has(mapKey)) {
               let val = guildMap.get(mapKey);
