@@ -256,7 +256,7 @@ discordClient.on('message', async (msg) => {
         if (user) {
           console.log('antes de member: ' + user)
           // Now we get the member from the user
-          const member = msg.guild.member(user);
+          const member = msg.guild.member(user).hasPermission('KICK_MEMBERS');
           // If the member is in the guild
           console.log('Despues de member: ' + member)
           if (member) {
@@ -266,33 +266,33 @@ discordClient.on('message', async (msg) => {
              * Make sure you run this on a member, not a user!
              * There are big differences between a user and a member
              */
-             member.edit(true, "Alv por puto")
-              .then(()=>
-              {msg.reply(`${user.tag}, Lo sacamos alv`);})
-              .catch(err => {
-                // An error happened
-                // This is generally due to the bot not being able to kick the member,
-                // either due to missing permissions or role hierarchy
-                msg.reply('Es vergas no lo pude mutear');
-                console.error(err);});
-
-              console.log('await: ' + member)
-              await member.setMute(true);
-
-            // member
-            //   .kick('Hora a chingar a su madre !')
-            //   .then(() => {
-            //     // We let the msg author know we were able to kick the person
-            //     msg.reply(`${user.tag}, Lo sacamos alv`);
-            //   })
+            //  member.edit(true, "Alv por puto")
+            //   .then(()=>
+            //   {msg.reply(`${user.tag}, Lo sacamos alv`);})
             //   .catch(err => {
             //     // An error happened
             //     // This is generally due to the bot not being able to kick the member,
             //     // either due to missing permissions or role hierarchy
-            //     msg.reply('Es vergas no lo pude sacar');
-            //     // Log the error
-            //     console.error(err);
-            //   });
+            //     msg.reply('Es vergas no lo pude mutear');
+            //     console.error(err);});
+
+            //   console.log('await: ' + member)
+            //   await GuildMember.edit.setMute(true);
+
+            member
+              .kick('Hora a chingar a su madre !')
+              .then(() => {
+                // We let the msg author know we were able to kick the person
+                msg.reply(`${user.tag}, Lo sacamos alv`);
+              })
+              .catch(err => {
+                // An error happened
+                // This is generally due to the bot not being able to kick the member,
+                // either due to missing permissions or role hierarchy
+                msg.reply('Es vergas no lo pude sacar');
+                // Log the error
+                console.error(err);
+              });
           } else {
             // The mentioned user isn't in this guild
             msg.reply("que pedo, que pedooo!");
