@@ -213,7 +213,7 @@ const _CMD_LEAVE       = PREFIX + 'adios';
 const _CMD_DEBUG       = PREFIX + 'debug';
 const _CMD_TEST        = PREFIX + 'hola';
 const _CMD_LANG        = PREFIX + 'lang';
-//const _CMD_MUTE        = PREFIX + 'callate';
+const _CMD_MUTE        = PREFIX + 'callate';
 
 const guildMap = new Map();
 
@@ -232,7 +232,7 @@ discordClient.on('message', async (msg) => {
                   msg.reply('Ya llegue prros')
           }
       } else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {                 //COMANDO MUTE
-        
+        msg.reply('No')
                                                       // FIN COMANDO MUTE
       } else if (msg.content.trim().toLowerCase() == _CMD_LEAVE) {
           if (guildMap.has(mapKey)) {
