@@ -248,8 +248,9 @@ discordClient.on('message', async (msg) => {
         //   .catch(console.error);
 
         console.log('Antes de user: ' + msg)
-        console.log('Estructura user: ' + msg.mentions.users.first())
-        const user = msg.mentions.users.first();
+        console.log('Estructura user: ' + discordClient.user)
+        //const user = msg.mentions.users.first();
+        const user = discordClient.user
         console.log('Despues de user: ' + user)
         // If we have a user mentioned
         if (user) {
