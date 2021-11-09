@@ -169,7 +169,7 @@ const _CMD_LEAVE       = PREFIX + 'adios';
 const _CMD_DEBUG       = PREFIX + 'debug';
 const _CMD_TEST        = PREFIX + 'hola';
 const _CMD_LANG        = PREFIX + 'lang';
-//const _CMD_MUTE        = PREFIX + 'callate';
+const _CMD_MUTE        = PREFIX + 'callate';
 
 const guildMap = new Map();
 
@@ -187,6 +187,15 @@ discordClient.on('message', async (msg) => {
               else
                   msg.reply('Ya llegue prros')
           }
+      } else if (msg.content.trim().toLowerCase() == _CMD_MUTE) {                 //COMANDO MUTE
+        msg.reply('Saca las cawas prro!');
+        voice_Connection.on('Hablando', async (user, speaking) => {
+          if (speaking.bitfield == 0 || user.bot) {
+            return
+          }
+          console.log(`Estoy por mutear a este prro: ${user.username}`)
+          msg.reply('Ya llegue prros', user.username)
+        });                                                                       // FIN COMANDO MUTE
       } else if (msg.content.trim().toLowerCase() == _CMD_LEAVE) {
           if (guildMap.has(mapKey)) {
               let val = guildMap.get(mapKey);
@@ -209,7 +218,7 @@ discordClient.on('message', async (msg) => {
               val.debug = true;
       }
       else if (msg.content.trim().toLowerCase() == _CMD_TEST) {
-          msg.reply('Saca las cawas prro!')
+          msg.reply('Te estoy probando, Mmmm que rico !!!')
       }
       else if (msg.content.split('\n')[0].split(' ')[0].trim().toLowerCase() == _CMD_LANG) {
           if (SPEECH_METHOD === 'witai') {
@@ -290,15 +299,15 @@ async function connect(msg, mapKey) {
 const vosk = require('vosk');
 let recs = {}
 if (SPEECH_METHOD === 'vosk') {
-vosk.setLogLevel(-1);
-// MODELS: https://alphacephei.com/vosk/models
-recs = {
-  //'en': new vosk.Recognizer({model: new vosk.Model('vosk_models/en'), sampleRate: 48000}),
-  // 'fr': new vosk.Recognizer({model: new vosk.Model('vosk_models/fr'), sampleRate: 48000}),
-  'es': new vosk.Recognizer({model: new vosk.Model('vosk_models/es'), sampleRate: 48000}),
-}
-// download new models if you need
-// dev reference: https://github.com/alphacep/vosk-api/blob/master/nodejs/index.js
+  vosk.setLogLevel(-1);
+  // MODELS: https://alphacephei.com/vosk/models
+  recs = {
+    //'en': new vosk.Recognizer({model: new vosk.Model('vosk_models/en'), sampleRate: 48000}),
+    // 'fr': new vosk.Recognizer({model: new vosk.Model('vosk_models/fr'), sampleRate: 48000}),
+    'es': new vosk.Recognizer({model: new vosk.Model('vosk_models/es'), sampleRate: 48000}),
+  }
+  // download new models if you need
+  // dev reference: https://github.com/alphacep/vosk-api/blob/master/nodejs/index.js
 }
 
 
