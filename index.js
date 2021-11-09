@@ -162,47 +162,52 @@ discordClient.on('ready', () => {
 })
 discordClient.login(DISCORD_TOK)
 
-discordClient.on('Sacate', msg => {
-  // Ignore messages that aren't from a guild
-  if (!msg.guild) return;
+discordClient.on('Sacate', async (msg) => {
+  try {
+    // Ignore messages that aren't from a guild
+    if (!msg.guild) return;
 
-  // If the msg content starts with "!kick"
-  if (msg.content.startsWith('|caile')) {
-    // Assuming we mention someone in the msg, this will return the user
-    const user = msg.mentions.users.first();
-    // If we have a user mentioned
-    if (user) {
-      // Now we get the member from the user
-      const member = msg.guild.member(user);
-      // If the member is in the guild
-      if (member) {
-        /**
-         * Kick the member
-         * Make sure you run this on a member, not a user!
-         * There are big differences between a user and a member
-         */
-        member
-          .kick('Hora a chingar a su madre !')
-          .then(() => {
-            // We let the msg author know we were able to kick the person
-            msg.reply(`${user.tag}, Lo sacamos alv`);
-          })
-          .catch(err => {
-            // An error happened
-            // This is generally due to the bot not being able to kick the member,
-            // either due to missing permissions or role hierarchy
-            msg.reply('Es vergas no lo pude sacar');
-            // Log the error
-            console.error(err);
-          });
+    // If the msg content starts with "!kick"
+    if (msg.content.startsWith('|caile')) {
+      // Assuming we mention someone in the msg, this will return the user
+      const user = msg.mentions.users.first();
+      // If we have a user mentioned
+      if (user) {
+        // Now we get the member from the user
+        const member = msg.guild.member(user);
+        // If the member is in the guild
+        if (member) {
+          /**
+           * Kick the member
+           * Make sure you run this on a member, not a user!
+           * There are big differences between a user and a member
+           */
+          member
+            .kick('Hora a chingar a su madre !')
+            .then(() => {
+              // We let the msg author know we were able to kick the person
+              msg.reply(`${user.tag}, Lo sacamos alv`);
+            })
+            .catch(err => {
+              // An error happened
+              // This is generally due to the bot not being able to kick the member,
+              // either due to missing permissions or role hierarchy
+              msg.reply('Es vergas no lo pude sacar');
+              // Log the error
+              console.error(err);
+            });
+        } else {
+          // The mentioned user isn't in this guild
+          msg.reply("que pedo, que pedooo!");
+        }
+        // Otherwise, if no user was mentioned
       } else {
-        // The mentioned user isn't in this guild
-        msg.reply("que pedo, que pedooo!");
+        msg.reply("Eso no hacemos aqui muchacho!");
       }
-      // Otherwise, if no user was mentioned
-    } else {
-      msg.reply("Eso no hacemos aqui muchacho!");
     }
+  } catch (e) {
+    console.log('Mensaje de discordCliente: ' + e)
+    msg.reply('Error#180: Algo esta pasanda !, intento de new o de plano mandale correo al que hizo esta madre.');
   }
 });
 
