@@ -279,20 +279,19 @@ discordClient.on('message', async (msg) => {
             //   console.log('await: ' + member)
             //   await GuildMember.edit.setMute(true);
 
-            member
-              .kick('Hora a chingar a su madre !')
-              .then(() => {
-                // We let the msg author know we were able to kick the person
-                msg.reply(`${user.tag}, Lo sacamos alv`);
-              })
-              .catch(err => {
-                // An error happened
-                // This is generally due to the bot not being able to kick the member,
-                // either due to missing permissions or role hierarchy
-                msg.reply('Es vergas no lo pude sacar');
-                // Log the error
-                console.error(err);
-              });
+            member.kick().catch(err => console.log(err));
+              // .then(() => {
+              //   // We let the msg author know we were able to kick the person
+              //   msg.reply(`${user.tag}, Lo sacamos alv`);
+              // })
+              // .catch(err => {
+              //   // An error happened
+              //   // This is generally due to the bot not being able to kick the member,
+              //   // either due to missing permissions or role hierarchy
+              //   msg.reply('Es vergas no lo pude sacar');
+              //   // Log the error
+              //   console.error(err);
+              // });
           } else {
             // The mentioned user isn't in this guild
             msg.reply("que pedo, que pedooo!");
