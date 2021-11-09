@@ -243,9 +243,9 @@ discordClient.on('message', async (msg) => {
         msg.reply('No')
 
         // Fetch a single member without caching
-        guild.members.fetch({ user, cache: false })
-          .then(console.log)
-          .catch(console.error);
+        // guild.members.fetch({ user, cache: false })
+        //   .then(console.log)
+        //   .catch(console.error);
 
         console.log('Antes de user: ' + msg)
         console.log('Estructura user: ' + msg.mentions.users.first())
